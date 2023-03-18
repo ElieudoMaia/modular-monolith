@@ -3,11 +3,13 @@ import { BaseEntity } from "../../@shared/domain/entity/base.entity";
 import { Id } from '../../@shared/domain/value-object/id.value-object';
 
 type ProductProps = {
-  id?: Id
+  id?: Id;
   name: string;
   description: string;
   purchasePrice: number;
   stock: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export class Product extends BaseEntity implements AggregateRoot {
