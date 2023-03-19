@@ -18,8 +18,10 @@ const makeProductGatewayMock = (): ProductGateway => {
 
 describe("CheckStock unit tests", () => {
   test("should return the stock", async () => {
-    const checkStockUseCase = new CheckStockUseCase(makeProductGatewayMock());
+    const productRepository = makeProductGatewayMock();
+    const checkStockUseCase = new CheckStockUseCase(productRepository);
     const output = await checkStockUseCase.execute({ productId: "1" });
+    expect(productRepository.find).toBeCalledWith("1");
     expect(output).toBeDefined();
     expect(output.stock).toBe(10);
   });
