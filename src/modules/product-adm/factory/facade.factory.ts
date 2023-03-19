@@ -1,7 +1,7 @@
 import { ProductAdmFacade } from '../facade/product-adm.facade';
 import { ProductAdmFacadeInterface } from '../facade/product-adm.facade.interface';
 import { ProductRepository } from '../repository/product.repository';
-import { AddProductUsecase } from '../usecase/add-product.usecase';
+import { AddProductUsecase } from '../usecase/add-product/add-product.usecase';
 
 export class ProductAdmFacadeFactory {
   static create(): ProductAdmFacadeInterface {

@@ -1,5 +1,5 @@
-import { Product } from "../domain/product.entity";
-import { ProductGateway } from '../gateway/product.gateway';
+import { Product } from "../../domain/product.entity";
+import { ProductGateway } from '../../gateway/product.gateway';
 import { AddProductUsecase } from './add-product.usecase';
 
 const makeProductGatewayMock = (): ProductGateway => {
