@@ -1,8 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
+import { ProductAdmFacadeFactory } from '../factory/facade.factory';
 import { ProductModel } from "../repository/product.model";
-import { ProductRepository } from "../repository/product.repository";
-import { AddProductUsecase } from "../usecase/add-product.usecase";
-import { ProductAdmFacade } from "./product-adm.facade";
 
 describe("ProductAdmFacade integration test", () => {
   let sequelize: Sequelize;
@@ -25,12 +23,8 @@ describe("ProductAdmFacade integration test", () => {
   });
 
   test("should create a product", async () => {
-    const productRepository = new ProductRepository();
-    const addproductUsecase = new AddProductUsecase(productRepository);
-    const productFacade = new ProductAdmFacade({
-      addproductUsecase,
-      checkStockUsecase: { execute: jest.fn() },
-    });
+    const productFacade = ProductAdmFacadeFactory.create();
+
     await productFacade.addProduct({
       id: "1",
       name: "Product 1",
