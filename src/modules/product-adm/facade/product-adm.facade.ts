@@ -1,5 +1,5 @@
-import { UseCaseInterface } from "../../@shared/usecase/use-case.interface";
 import { AddProductUseCaseInterface } from '../usecase/add-product/add-product.usecase.interface';
+import { CheckStockUseCaseInterface } from '../usecase/check-stock/check-stock.usecase.interface';
 import {
   AddProductFacadeInputDTO,
   CheckStockFacadeInputDTO,
@@ -9,12 +9,12 @@ import {
 
 export interface ProductAdmFacadeProps {
   addproductUsecase: AddProductUseCaseInterface
-  checkStockUsecase: UseCaseInterface;
+  checkStockUsecase: CheckStockUseCaseInterface;
 }
 
 export class ProductAdmFacade implements ProductAdmFacadeInterface {
   private readonly _addproductUsecase: AddProductUseCaseInterface;
-  private readonly _checkStockUsecase: UseCaseInterface;
+  private readonly _checkStockUsecase: CheckStockUseCaseInterface;
 
   constructor(usecases: ProductAdmFacadeProps) {
     this._addproductUsecase = usecases.addproductUsecase;
@@ -28,6 +28,10 @@ export class ProductAdmFacade implements ProductAdmFacadeInterface {
   async checkStock(
     input: CheckStockFacadeInputDTO
   ): Promise<CheckStockFacadeOutputDTO> {
-    return this._checkStockUsecase.execute(input);
+    const output = await this._checkStockUsecase.execute(input);
+    return {
+      productId: input.productId,
+      stock: output.stock,
+    }
   }
 }
