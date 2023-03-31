@@ -19,6 +19,7 @@ const product2 = new Product({
 const makeProductGatewayMock = (): ProductGateway => {
   return {
     findAll: jest.fn().mockResolvedValue([product1, product2]),
+    find: jest.fn(),
   };
 };
 

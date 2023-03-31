@@ -13,4 +13,15 @@ export class ProductRepository implements ProductGateway {
       salesPrice: product.salesPrice,
     }))
   }
+
+  async find(id: string): Promise<Product | null> {
+    const product = await ProductModel.findOne({ where: { id } });
+    if (!product) return null;
+    return new Product({
+      id: new Id(product.id),
+      name: product.name,
+      description: product.description,
+      salesPrice: product.salesPrice,
+    });
+  }
 }
