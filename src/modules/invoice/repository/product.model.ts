@@ -7,11 +7,11 @@ import { Model, Table, Column, PrimaryKey } from "sequelize-typescript";
 export class ProductModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  id!: string;
+  declare id: string;
 
   @Column({ allowNull: false })
-  name!: string;
+  declare name: string;
 
   @Column({ allowNull: false })
-  price!: number;
+  declare price: number;
 }

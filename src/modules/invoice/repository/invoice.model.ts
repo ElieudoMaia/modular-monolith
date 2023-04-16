@@ -16,23 +16,23 @@ import { ProductModel } from './product.model';
 export class InvoiceModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  id!: string;
+  declare id: string;
 
   @Column({ allowNull: false })
-  name!: string;
+  declare name: string;
 
   @Column({ allowNull: false })
-  document!: string;
+  declare document: string;
 
   @Column({ allowNull: false })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @Column({ allowNull: false })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 
   @HasMany(() => ProductModel, { foreignKey: "invoiceId", as: "products" })
-  products!: ProductModel[];
+  declare products: ProductModel[];
 
   @HasOne(() => AddressModel, { foreignKey: "invoiceId", as: "address" })
-  address!: AddressModel;
+  declare address: AddressModel;
 }

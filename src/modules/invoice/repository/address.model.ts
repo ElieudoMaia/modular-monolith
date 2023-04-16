@@ -9,23 +9,23 @@ import { InvoiceModel } from './invoice.model';
 export class AddressModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  invoiceId!: string;
+  declare invoiceId: string;
 
   @Column({ allowNull: false })
-  street!: string;
+  declare street: string;
 
   @Column({ allowNull: false })
-  number!: string;
+  declare number: string;
 
   @Column({ allowNull: false })
-  city!: string;
+  declare city: string;
 
   @Column({ allowNull: false })
-  state!: string;
+  declare state: string;
 
   @Column({ allowNull: false })
-  zipCode!: string;
+  declare zipCode: string;
 
   @Column({ allowNull: false })
-  complement!: string;
+  declare complement: string;
 }
