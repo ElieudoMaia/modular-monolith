@@ -24,7 +24,7 @@ const makeSut = (): SutTypes => {
     addClient: jest.fn(),
     findClient: jest.fn().mockResolvedValue({
       id: "1",
-      name: "Any  name",
+      name: "Any name",
       email: "any@mail.com",
       address: "Any address",
       createdAt: Date.now,
@@ -67,7 +67,7 @@ const makeSut = (): SutTypes => {
       status: "error",
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }),
   };
 
   const placeOrderUseCase = new PlaceOrderUseCase(
@@ -279,16 +279,11 @@ describe("PlaceOrder use case unit tests", () => {
 
         const mockGetProduct = jest
           .spyOn(sut as any, "getProduct")
-          .mockImplementation(
-            (productId: unknown): any => {
-              console.log("######" + productId);
-              if (productId === "10" || productId === "20") {
-                return Promise.resolve(
-                  fakeProducts[productId]
-                );
-              }
+          .mockImplementation((productId: unknown): any => {
+            if (productId === "10" || productId === "20") {
+              return Promise.resolve(fakeProducts[productId]);
             }
-          );
+          });
 
         const input: PlaceOrderUseCaseInputDTO = {
           clientId: "1c",
@@ -347,15 +342,11 @@ describe("PlaceOrder use case unit tests", () => {
 
         const mockGetProduct = jest
           .spyOn(sut as any, "getProduct")
-          .mockImplementation(
-            (productId: unknown): any => {
-              if (productId === "10" || productId === "20") {
-                return Promise.resolve(
-                  fakeProducts[productId]
-                );
-              }
+          .mockImplementation((productId: unknown): any => {
+            if (productId === "10" || productId === "20") {
+              return Promise.resolve(fakeProducts[productId]);
             }
-          );
+          });
 
         const input: PlaceOrderUseCaseInputDTO = {
           clientId: "1c",
@@ -388,6 +379,20 @@ describe("PlaceOrder use case unit tests", () => {
         });
         expect(mockCheckoutRepository.addOrder).toHaveBeenCalledTimes(1);
         expect(mockInvoiceFacade.generateInvoice).toHaveBeenCalledTimes(1);
+        expect(mockInvoiceFacade.generateInvoice).toHaveBeenCalledWith({
+          city: "Any city",
+          complement: "Any complement",
+          document: "00001",
+          name: "Any name",
+          number: "10",
+          state: "Any state",
+          street: "Any address",
+          zipCode: "00000-000",
+          items: [
+            { id: "10", name: "Any name", price: 10 },
+            { id: "20", name: "Any name 2", price: 20 },
+          ],
+        });
       });
     });
   });

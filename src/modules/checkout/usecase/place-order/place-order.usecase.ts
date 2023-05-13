@@ -68,13 +68,13 @@ export class PlaceOrderUseCase implements PlaceOrderUseCaseInterface {
     if (payment.status === "approved") {
       invoice = await this._invoiceFacade.generateInvoice({
         name: client.name,
-        city: client.address,
-        complement: client.address,
-        document: "",
-        number: "",
-        state: "",
+        city: "Any city",
+        complement: "Any complement",
+        document: "00001",
+        number: "10",
+        state: "Any state",
         street: client.address,
-        zipCode: "",
+        zipCode: "00000-000",
         items: products.map((p) => ({
           id: p.id.value,
           name: p.name,
