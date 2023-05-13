@@ -22,5 +22,5 @@ export interface ClientFacadeInterface {
   addClient(input: AddClientFacadeInputDTO): Promise<void>;
   findClient(
     input: FindClientFacadeInputDTO
-  ): Promise<FindClientFacadeOutputDTO>;
+  ): Promise<FindClientFacadeOutputDTO | null>;
 }
